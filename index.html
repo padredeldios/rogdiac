@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ρογδιά — Café Restaurant, Κιανή Ακτή Χανιά</title>
+<meta name="description" content="Ρογδιά — café restaurant στην Κιανή Ακτή, Χανιά. Καφές, πρωινό, κουζίνα και κοκτέιλ δίπλα στη θάλασσα.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@400;600&family=Noto+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f6f1ea; --paper:#fffdf9; --ink:#1e1d1c; --muted:#6f6a64;
+    --pom:#8e1b2c; --pom-dark:#6a1220; --sea:#1f4e5f; --line:#e6ddd1;
+    --serif:"Noto Serif Display",Georgia,serif;
+    --sans:"Noto Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  img{display:block;width:100%;height:100%;object-fit:cover}
+
+  /* top bar */
+  .topbar{background:var(--ink);color:#e9e3da;font-size:.8rem;padding:7px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .langs{display:flex;gap:4px}
+  .langs button{background:none;border:1px solid transparent;color:#e9e3da;font:inherit;font-size:.75rem;padding:2px 8px;border-radius:12px;cursor:pointer;letter-spacing:.05em}
+  .langs button.active{border-color:#e9e3da}
+
+  /* header */
+  header{position:sticky;top:0;z-index:20;background:rgba(246,241,234,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .head-in{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .brand svg{width:34px;height:34px}
+  .brand span{font-family:var(--serif);font-size:1.55rem;font-weight:600;color:var(--pom);letter-spacing:.02em}
+  .mainnav{display:flex;gap:22px;align-items:center}
+  .mainnav a{text-decoration:none;font-size:.92rem;color:var(--ink)}
+  .mainnav a:hover{color:var(--pom)}
+  .mainnav a.btn,.mainnav a.btn:hover{color:#fff}
+  .btn{display:inline-block;text-decoration:none;font-weight:600;font-size:.9rem;padding:11px 22px;border-radius:999px;border:1.5px solid var(--pom);background:var(--pom);color:#fff;cursor:pointer;transition:.2s}
+  .btn:hover{background:var(--pom-dark);border-color:var(--pom-dark)}
+  .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.8)}
+  .btn.ghost:hover{background:rgba(255,255,255,.12)}
+  .btn.outline{background:transparent;color:var(--pom)}
+  .btn.outline:hover{background:var(--pom);color:#fff}
+  @media (max-width:760px){.mainnav a.nl{display:none}.brand span{font-size:1.3rem}}
+
+  /* photo slots */
+  .ph{position:relative;overflow:hidden;background:linear-gradient(135deg,#c9b8a3,#8a9a9c)}
+  .ph .lbl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;color:rgba(255,255,255,.92);font-size:.85rem;letter-spacing:.04em}
+  .ph .lbl::before{content:"";position:absolute;inset:10px;border:1px dashed rgba(255,255,255,.55);border-radius:6px}
+
+  html[lang=el] .eyebrow,html[lang=el] .space-txt .time{text-transform:none}
+  /* hero */
+  .hero{position:relative;min-height:min(88vh,780px);display:flex;align-items:flex-end;color:#fff}
+  .hero .ph{position:absolute;inset:0;background:radial-gradient(ellipse at 75% 30%,rgba(142,27,44,.55),transparent 55%),linear-gradient(160deg,#2c6577 0%,#1f4e5f 45%,#132f39 100%)}
+  .hero .ph .lbl{align-items:flex-start;padding-top:40px}
+  .hero .ph .lbl::before{display:none}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),rgba(0,0,0,0) 60%),linear-gradient(to right,rgba(0,0,0,.35),rgba(0,0,0,0) 55%)}
+  .hero-in{position:relative;z-index:2;max-width:1180px;width:100%;margin:0 auto;padding:0 20px 70px}
+  .eyebrow{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;opacity:.9}
+  .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,6vw,4.6rem);line-height:1.08;margin:14px 0 18px;max-width:14ch}
+  .hero p{max-width:46ch;opacity:.92;font-size:1.05rem}
+  .hero .cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+
+  /* generic section */
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  .sec{padding:90px 0}
+  .sec-title{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,4vw,2.8rem);line-height:1.15;color:var(--ink)}
+  .sec-sub{color:var(--muted);margin-top:10px;max-width:56ch}
+  .center{text-align:center}.center .sec-sub{margin-left:auto;margin-right:auto}
+
+  /* intro */
+  .intro{background:var(--paper);text-align:center}
+  .intro p.big{font-family:var(--serif);font-size:clamp(1.3rem,2.6vw,1.75rem);line-height:1.5;max-width:34ch;margin:0 auto;color:var(--ink)}
+  .intro .pom{width:44px;margin:0 auto 22px}
+
+  /* spaces */
+  .space{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;padding:60px 0}
+  .space.rev .space-txt{order:-1}
+  .space-txt .time{display:inline-block;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--pom);border:1px solid var(--pom);border-radius:999px;padding:4px 12px;margin-bottom:16px}
+  .space-txt h3{font-family:var(--serif);font-weight:400;font-size:2rem;line-height:1.2;margin-bottom:14px}
+  .space-txt p{color:var(--muted)}
+  .strip{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:10px;height:440px}
+  .strip .ph{border-radius:6px}
+  .strip .ph:first-child{grid-row:1/3}
+  @media (max-width:860px){.space{grid-template-columns:1fr;gap:26px;padding:40px 0}.space.rev .space-txt{order:0}.strip{height:320px}}
+
+  /* menu */
+  .menu-sec{background:var(--paper)}
+  .tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:34px 0 30px}
+  .tabs button{font:inherit;font-size:.9rem;background:none;border:1px solid var(--line);color:var(--ink);padding:8px 18px;border-radius:999px;cursor:pointer}
+  .tabs button.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .menu-list{max-width:760px;margin:0 auto}
+  .mi{display:flex;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px dotted #cfc4b5}
+  .mi .n{font-weight:600}
+  .mi .d{color:var(--muted);font-size:.9rem;margin-top:2px}
+  .mi .p{font-family:var(--serif);font-size:1.15rem;white-space:nowrap;color:var(--pom)}
+  .tag{display:inline-block;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:1px 8px;margin:6px 4px 0 0;color:var(--muted)}
+  .menu-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:26px}
+
+  /* booking */
+  .book{background:var(--pom);color:#fff;text-align:center}
+  .book .sec-title{color:#fff}
+  .book .sec-sub{color:rgba(255,255,255,.85)}
+  .book .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+  .book .btn{background:#fff;color:var(--pom);border-color:#fff}
+  .book .btn:hover{background:var(--cream)}
+  .book .num{margin-top:18px;font-size:.95rem;opacity:.9;letter-spacing:.04em}
+
+  /* location */
+  .loc{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:stretch}
+  .loc .ph{border-radius:6px;min-height:340px;background:linear-gradient(135deg,#d8cdbd,#a9b7b4)}
+  .hours{margin-top:24px;border-top:1px solid var(--line)}
+  .hours div{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+  .loc address{font-style:normal;margin-top:16px;color:var(--muted)}
+  .loc .btn{margin-top:26px}
+  @media (max-width:860px){.loc{grid-template-columns:1fr}}
+
+  /* footer */
+  footer{background:var(--ink);color:#cfc8be;padding:50px 20px 34px;text-align:center;font-size:.88rem}
+  footer .brand{justify-content:center;margin-bottom:14px}
+  footer .brand span{color:#fff}
+  .social{display:flex;gap:18px;justify-content:center;margin:16px 0}
+  .social a{text-decoration:none;color:#fff;opacity:.85}
+  .social a:hover{opacity:1}
+  footer small{display:block;margin-top:20px;opacity:.6}
+</style>
+</head>
+<body>
+
+<script>
+/* =====================================================================
+   ΡΥΘΜΙΣΕΙΣ — ΟΛΑ ΤΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΜΑΓΑΖΙΟΥ ΑΛΛΑΖΟΥΝ ΜΟΝΟ ΕΔΩ
+   Φωτογραφίες: βάλε τα αρχεία στον φάκελο images/ και γράψε το όνομα
+   στο src (π.χ. src:"images/hero.jpg"). Αν src είναι "", δείχνει placeholder.
+   ===================================================================== */
+const SITE = {
+  name: "Ρογδιά",
+  phone: "+30 28210 00000",          // ← πραγματικό τηλέφωνο
+  whatsapp: "306900000000",          // ← κινητό χωρίς + και κενά (ή "" για να κρυφτεί)
+  address: { el:"Κιανή Ακτή, Χανιά 731 32", en:"Kiani Akti, Chania 731 32", de:"Kiani Akti, Chania 731 32", fr:"Kiani Akti, La Canée 731 32" },
+  mapsUrl: "https://maps.google.com/?q=Kiani+Akti+Chania",  // ← link του μαγαζιού στο Google Maps
+  instagram: "https://instagram.com/",
+  facebook: "https://facebook.com/",
+  languages: ["el","en","de","fr"],
+  defaultLang: "el",
+  currency: "€",
+  hero: { src:"images/hero.svg", label:"Ρογδιά" },
+  locationPhoto: { src:"images/facade.svg", label:"Πρόσοψη" },
+  hours: [
+    { d:{el:"Δευτέρα – Πέμπτη",en:"Monday – Thursday",de:"Montag – Donnerstag",fr:"Lundi – Jeudi"}, h:"08:00 – 00:00" },
+    { d:{el:"Παρασκευή – Σάββατο",en:"Friday – Saturday",de:"Freitag – Samstag",fr:"Vendredi – Samedi"}, h:"08:00 – 02:00" },
+    { d:{el:"Κυριακή",en:"Sunday",de:"Sonntag",fr:"Dimanche"}, h:"09:00 – 00:00" }
+  ]
+};
+
+const SPACES = [
+  {
+    time: { el:"08:00 – 12:30", en:"08:00 – 12:30", de:"08:00 – 12:30", fr:"08:00 – 12:30" },
+    title:{ el:"Πρωινό & καφές δίπλα στο κύμα", en:"Breakfast & coffee by the waves", de:"Frühstück & Kaffee am Meer", fr:"Petit-déjeuner & café face à la mer" },
+    text: { el:"Ξεκίνα τη μέρα με specialty καφέ, φρέσκους χυμούς και κρητικό πρωινό με ντόπια προϊόντα, με θέα την Κιανή Ακτή.",
+            en:"Start your day with specialty coffee, fresh juices and a Cretan breakfast made with local produce, overlooking Kiani Akti.",
+            de:"Beginnen Sie den Tag mit Specialty-Kaffee, frischen Säften und kretischem Frühstück aus regionalen Produkten – mit Blick auf Kiani Akti.",
+            fr:"Commencez la journée avec un café de spécialité, des jus frais et un petit-déjeuner crétois aux produits locaux, face à Kiani Akti." },
+    photos:[ {src:"images/breakfast.svg",label:"Πρωινό"}, {src:"images/coffee.svg",label:"Καφές"}, {src:"images/outdoor.svg",label:"Τραπέζια έξω"} ]
+  },
+  {
+    time: { el:"12:30 – 23:30", en:"12:30 – 23:30", de:"12:30 – 23:30", fr:"12:30 – 23:30" },
+    title:{ el:"Κουζίνα με κρητική ψυχή", en:"A kitchen with a Cretan soul", de:"Küche mit kretischer Seele", fr:"Une cuisine à l'âme crétoise" },
+    text: { el:"Φρέσκες σαλάτες, ζυμαρικά, ψάρι της ημέρας και πιάτα εμπνευσμένα από την κρητική παράδοση, για μεσημεριανό ή δείπνο.",
+            en:"Fresh salads, pasta, catch of the day and dishes inspired by Cretan tradition, for lunch or dinner.",
+            de:"Frische Salate, Pasta, Fang des Tages und Gerichte nach kretischer Tradition – mittags wie abends.",
+            fr:"Salades fraîches, pâtes, poisson du jour et plats inspirés de la tradition crétoise, pour le déjeuner ou le dîner." },
+    photos:[ {src:"images/plate.svg",label:"Πιάτο"}, {src:"images/salad.svg",label:"Σαλάτα"}, {src:"images/interior.svg",label:"Εσωτερικός χώρος"} ]
+  },
+  {
+    time: { el:"Από τη δύση", en:"From sunset", de:"Ab Sonnenuntergang", fr:"Dès le coucher du soleil" },
+    title:{ el:"Κοκτέιλ & βραδιές", en:"Cocktails & evenings", de:"Cocktails & Abende", fr:"Cocktails & soirées" },
+    text: { el:"Signature κοκτέιλ με κρητικά αρώματα, επιλεγμένα κρασιά και μουσική, μέχρι αργά το βράδυ.",
+            en:"Signature cocktails with Cretan aromas, selected wines and music until late.",
+            de:"Signature-Cocktails mit kretischen Aromen, ausgewählte Weine und Musik bis spät in die Nacht.",
+            fr:"Cocktails signature aux arômes crétois, vins sélectionnés et musique jusque tard." },
+    photos:[ {src:"images/cocktail.svg",label:"Κοκτέιλ"}, {src:"images/bar.svg",label:"Bar"}, {src:"images/evening.svg",label:"Βράδυ"} ]
+  }
+];
+
+/* ΜΕΝΟΥ — DEMO δεδομένα, αντικατάστησέ τα με το πραγματικό μενού */
+const MENU = [
+  { id:"coffee", title:{el:"Καφές",en:"Coffee",de:"Kaffee",fr:"Café"}, items:[
+    { name:{el:"Freddo espresso",en:"Freddo espresso",de:"Freddo Espresso",fr:"Freddo espresso"}, price:3.5 },
+    { name:{el:"Freddo cappuccino",en:"Freddo cappuccino",de:"Freddo Cappuccino",fr:"Freddo cappuccino"}, price:4 },
+    { name:{el:"Ελληνικός καφές",en:"Greek coffee",de:"Griechischer Kaffee",fr:"Café grec"}, price:2.5 },
+    { name:{el:"Φρέσκος χυμός πορτοκάλι",en:"Fresh orange juice",de:"Frischer Orangensaft",fr:"Jus d'orange frais"}, price:4.5 }
+  ]},
+  { id:"breakfast", title:{el:"Πρωινό",en:"Breakfast",de:"Frühstück",fr:"Petit-déjeuner"}, items:[
+    { name:{el:"Κρητικό πρωινό",en:"Cretan breakfast",de:"Kretisches Frühstück",fr:"Petit-déjeuner crétois"},
+      desc:{el:"Αυγά, ντομάτα, ελιές, γραβιέρα, παξιμάδι, μέλι",en:"Eggs, tomato, olives, graviera, rusk, honey",de:"Eier, Tomate, Oliven, Graviera, Zwieback, Honig",fr:"Œufs, tomate, olives, graviera, biscotte, miel"}, price:11, tags:["veg"] },
+    { name:{el:"Γιαούρτι με μέλι & ρόδι",en:"Yogurt with honey & pomegranate",de:"Joghurt mit Honig & Granatapfel",fr:"Yaourt au miel & grenade"}, price:6.5, tags:["veg"] },
+    { name:{el:"Avocado toast",en:"Avocado toast",de:"Avocado-Toast",fr:"Toast à l'avocat"},
+      desc:{el:"Προζυμένιο ψωμί, αβοκάντο, αυγό ποσέ",en:"Sourdough, avocado, poached egg",de:"Sauerteigbrot, Avocado, pochiertes Ei",fr:"Pain au levain, avocat, œuf poché"}, price:9.5, tags:["veg"] }
+  ]},
+  { id:"salads", title:{el:"Σαλάτες",en:"Salads",de:"Salate",fr:"Salades"}, items:[
+    { name:{el:"Ντάκος",en:"Dakos",de:"Dakos",fr:"Dakos"},
+      desc:{el:"Παξιμάδι, ντομάτα, μυζήθρα, κάπαρη",en:"Barley rusk, tomato, mizithra, capers",de:"Gerstenzwieback, Tomate, Mizithra, Kapern",fr:"Biscotte d'orge, tomate, mizithra, câpres"}, price:8.5, tags:["veg"] },
+    { name:{el:"Σαλάτα Ρογδιά",en:"Rogdia salad",de:"Rogdia-Salat",fr:"Salade Rogdia"},
+      desc:{el:"Χόρτα εποχής, ρόδι, κατσικίσιο τυρί, καρύδια",en:"Seasonal greens, pomegranate, goat cheese, walnuts",de:"Saisonale Blätter, Granatapfel, Ziegenkäse, Walnüsse",fr:"Jeunes pousses, grenade, chèvre, noix"}, price:11, tags:["veg"] }
+  ]},
+  { id:"mains", title:{el:"Κυρίως",en:"Mains",de:"Hauptgerichte",fr:"Plats"}, items:[
+    { name:{el:"Ψάρι ημέρας",en:"Catch of the day",de:"Fang des Tages",fr:"Poisson du jour"}, desc:{el:"Τιμή ανά κιλό",en:"Price per kg",de:"Preis pro kg",fr:"Prix au kg"}, price:58 },
+    { name:{el:"Λιγκουίνι θαλασσινών",en:"Seafood linguine",de:"Linguine mit Meeresfrüchten",fr:"Linguine aux fruits de mer"}, price:18 },
+    { name:{el:"Χοιρινό αντικρυστό",en:"Antikristo pork",de:"Antikristo-Schwein",fr:"Porc antikristo"}, desc:{el:"Ψημένο αργά, πατάτες φούρνου",en:"Slow-roasted, oven potatoes",de:"Langsam gegart, Ofenkartoffeln",fr:"Rôti lentement, pommes de terre au four"}, price:16 }
+  ]},
+  { id:"cocktails", title:{el:"Κοκτέιλ",en:"Cocktails",de:"Cocktails",fr:"Cocktails"}, items:[
+    { name:{el:"Rogdia Spritz",en:"Rogdia Spritz",de:"Rogdia Spritz",fr:"Rogdia Spritz"}, desc:{el:"Ρόδι, prosecco, soda",en:"Pomegranate, prosecco, soda",de:"Granatapfel, Prosecco, Soda",fr:"Grenade, prosecco, soda"}, price:10 },
+    { name:{el:"Raki sour",en:"Raki sour",de:"Raki Sour",fr:"Raki sour"}, desc:{el:"Ρακή, λεμόνι, μέλι θυμαρίσιο",en:"Raki, lemon, thyme honey",de:"Raki, Zitrone, Thymianhonig",fr:"Raki, citron, miel de thym"}, price:10 },
+    { name:{el:"Ποτήρι κρασί",en:"Glass of wine",de:"Glas Wein",fr:"Verre de vin"}, price:6 }
+  ]}
+];
+
+const TAGS = { veg:{el:"Χορτοφαγικό",en:"Vegetarian",de:"Vegetarisch",fr:"Végétarien"}, vegan:{el:"Vegan",en:"Vegan",de:"Vegan",fr:"Végan"} };
+
+const UI = {
+  open:     {el:"Ανοιχτά καθημερινά από τις 08:00",en:"Open daily from 08:00",de:"Täglich geöffnet ab 08:00",fr:"Ouvert tous les jours dès 08h00"},
+  navSpaces:{el:"Ο χώρος",en:"The place",de:"Der Ort",fr:"Le lieu"},
+  navMenu:  {el:"Μενού",en:"Menu",de:"Speisekarte",fr:"Carte"},
+  navLoc:   {el:"Τοποθεσία",en:"Location",de:"Anfahrt",fr:"Accès"},
+  book:     {el:"Κράτηση",en:"Book a table",de:"Tisch reservieren",fr:"Réserver"},
+  eyebrow:  {el:"Café · Restaurant · Bar — Κιανή Ακτή, Χανιά",en:"Café · Restaurant · Bar — Kiani Akti, Chania",de:"Café · Restaurant · Bar — Kiani Akti, Chania",fr:"Café · Restaurant · Bar — Kiani Akti, La Canée"},
+  heroT:    {el:"Από τον πρωινό καφέ ως το τελευταίο ποτό",en:"From morning coffee to the last drink",de:"Vom Morgenkaffee bis zum letzten Drink",fr:"Du café du matin au dernier verre"},
+  heroP:    {el:"Ένα all-day στέκι δίπλα στη θάλασσα, λίγα βήματα από το παλιό λιμάνι.",en:"An all-day spot by the sea, a few steps from the old harbour.",de:"Ein Ganztagslokal am Meer, nur wenige Schritte vom alten Hafen.",fr:"Une adresse toute la journée au bord de la mer, à deux pas du vieux port."},
+  seeMenu:  {el:"Δες το μενού",en:"See the menu",de:"Zur Speisekarte",fr:"Voir la carte"},
+  intro:    {el:"Η ρογδιά, η ροδιά, είναι στην Κρήτη σύμβολο καλοτυχίας και φιλοξενίας. Αυτό θέλουμε να νιώθεις από τη στιγμή που θα κάτσεις.",
+             en:"In Crete the rogdia — the pomegranate tree — is a symbol of good fortune and hospitality. That's how we want you to feel from the moment you sit down.",
+             de:"Auf Kreta ist die Rogdia – der Granatapfelbaum – ein Symbol für Glück und Gastfreundschaft. So sollen Sie sich vom ersten Moment an fühlen.",
+             fr:"En Crète, la rogdia – le grenadier – symbolise la chance et l'hospitalité. C'est ce que nous voulons vous faire ressentir dès que vous vous asseyez."},
+  menuSub:  {el:"Ενδεικτικό μενού, αλλάζει ανάλογα με την εποχή.",en:"Sample menu, it changes with the season.",de:"Beispielkarte, sie wechselt mit der Saison.",fr:"Carte indicative, elle change selon la saison."},
+  vat:      {el:"Οι τιμές περιλαμβάνουν ΦΠΑ. Ενημερώστε μας για τυχόν αλλεργίες.",en:"Prices include VAT. Please tell us about any allergies.",de:"Preise inkl. MwSt. Bitte informieren Sie uns über Allergien.",fr:"Prix TTC. Merci de nous signaler toute allergie."},
+  bookT:    {el:"Κλείσε τραπέζι",en:"Reserve your table",de:"Reservieren Sie Ihren Tisch",fr:"Réservez votre table"},
+  bookP:    {el:"Για κρατήσεις και ομάδες, πάρε μας τηλέφωνο ή στείλε μήνυμα.",en:"For reservations and groups, call us or send a message.",de:"Für Reservierungen und Gruppen rufen Sie uns an oder schreiben Sie uns.",fr:"Pour réserver ou pour les groupes, appelez-nous ou envoyez un message."},
+  call:     {el:"Τηλεφώνησε",en:"Call us",de:"Anrufen",fr:"Appeler"},
+  wa:       {el:"WhatsApp",en:"WhatsApp",de:"WhatsApp",fr:"WhatsApp"},
+  locT:     {el:"Θα μας βρεις",en:"Find us",de:"So finden Sie uns",fr:"Nous trouver"},
+  directions:{el:"Οδηγίες στο Google Maps",en:"Directions on Google Maps",de:"Route in Google Maps",fr:"Itinéraire Google Maps"},
+  hoursT:   {el:"Ωράριο",en:"Opening hours",de:"Öffnungszeiten",fr:"Horaires"}
+};
+/* ===================================================================== */
+</script>
+
+<div class="topbar">
+  <span id="openTxt"></span>
+  <div class="langs" id="langs"></div>
+</div>
+
+<header>
+  <div class="head-in">
+    <a class="brand" href="#top" aria-label="Home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M17 6.5l3 3 3-3 .2 4.2A13 13 0 1 1 16.8 10.7z" fill="#8e1b2c"/><circle cx="16" cy="22" r="1.6" fill="#f6f1ea"/><circle cx="22" cy="20" r="1.6" fill="#f6f1ea"/><circle cx="20" cy="26" r="1.6" fill="#f6f1ea"/><circle cx="25" cy="25" r="1.6" fill="#f6f1ea"/></svg>
+      <span class="site-name"></span>
+    </a>
+    <nav class="mainnav">
+      <a class="nl" href="#spaces" data-t="navSpaces"></a>
+      <a class="nl" href="#menu" data-t="navMenu"></a>
+      <a class="nl" href="#location" data-t="navLoc"></a>
+      <a class="btn" href="#book" data-t="book"></a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="ph" id="heroPh"></div>
+  <div class="hero-in">
+    <div class="eyebrow" data-t="eyebrow"></div>
+    <h1 data-t="heroT"></h1>
+    <p data-t="heroP"></p>
+    <div class="cta">
+      <a class="btn" href="#book" data-t="book"></a>
+      <a class="btn ghost" href="#menu" data-t="seeMenu"></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec intro">
+  <div class="wrap">
+    <svg class="pom" viewBox="0 0 40 40" aria-hidden="true"><path d="M17 6.5l3 3 3-3 .2 4.2A13 13 0 1 1 16.8 10.7z" fill="#8e1b2c"/></svg>
+    <p class="big" data-t="intro"></p>
+  </div>
+</section>
+
+<section class="sec" id="spaces" style="padding-top:40px">
+  <div class="wrap" id="spacesList"></div>
+</section>
+
+<section class="sec menu-sec" id="menu">
+  <div class="wrap center">
+    <h2 class="sec-title" data-t="navMenu"></h2>
+    <p class="sec-sub" data-t="menuSub"></p>
+  </div>
+  <div class="wrap">
+    <div class="tabs" id="tabs"></div>
+    <div class="menu-list" id="menuList"></div>
+    <p class="menu-note" data-t="vat"></p>
+  </div>
+</section>
+
+<section class="sec book" id="book">
+  <div class="wrap">
+    <h2 class="sec-title" data-t="bookT"></h2>
+    <p class="sec-sub" style="margin:10px auto 0" data-t="bookP"></p>
+    <div class="cta" id="bookBtns"></div>
+    <p class="num" id="bookNum"></p>
+  </div>
+</section>
+
+<section class="sec" id="location">
+  <div class="wrap loc">
+    <div>
+      <h2 class="sec-title" data-t="locT"></h2>
+      <address id="addr"></address>
+      <div class="hours" id="hours"></div>
+      <a class="btn outline" id="mapsBtn" target="_blank" rel="noopener" data-t="directions"></a>
+    </div>
+    <div class="ph" id="locPh"></div>
+  </div>
+</section>
+
+<footer>
+  <a class="brand" href="#top"><span class="site-name"></span></a>
+  <div id="footAddr"></div>
+  <div class="social" id="social"></div>
+  <small>© <span id="yr"></span> <span class="site-name"></span></small>
+</footer>
+
+<script>
+const FLAGS = { el:"ΕΛ", en:"EN", de:"DE", fr:"FR", it:"IT" };
+const t = (o, l) => (o && (o[l] || o[SITE.defaultLang] || o.en)) || "";
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+const fmt = p => p.toFixed(2).replace(".", ",") + " " + SITE.currency;
+const photo = p => p.src ? `<img src="${esc(p.src)}" alt="${esc(p.label)}" loading="lazy">` : `<span class="lbl">${esc(p.label)}</span>`;
+const $ = id => document.getElementById(id);
+let lang, activeCat = MENU[0].id;
+
+function pickLang(){
+  let saved = null;
+  try { saved = localStorage.getItem("lang"); } catch(e){}
+  const fromUrl = new URLSearchParams(location.search).get("lang");
+  for (const c of [fromUrl, saved, (navigator.language||"").slice(0,2)])
+    if (SITE.languages.includes(c)) return c;
+  return SITE.defaultLang;
+}
+
+function renderMenu(){
+  $("tabs").innerHTML = MENU.map(c =>
+    `<button class="${c.id===activeCat?"active":""}" onclick="setCat('${c.id}')">${esc(t(c.title, lang))}</button>`).join("");
+  const cat = MENU.find(c => c.id === activeCat);
+  $("menuList").innerHTML = cat.items.map(i => `
+    <div class="mi">
+      <div>
+        <div class="n">${esc(t(i.name, lang))}</div>
+        ${i.desc ? `<div class="d">${esc(t(i.desc, lang))}</div>` : ""}
+        ${i.tags ? i.tags.map(g => `<span class="tag">${esc(t(TAGS[g], lang))}</span>`).join("") : ""}
+      </div>
+      <div class="p">${fmt(i.price)}</div>
+    </div>`).join("");
+}
+
+function render(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll(".site-name").forEach(e => e.textContent = SITE.name);
+  document.querySelectorAll("[data-t]").forEach(e => e.textContent = t(UI[e.dataset.t], lang));
+  $("openTxt").textContent = t(UI.open, lang);
+  $("langs").innerHTML = SITE.languages.map(l =>
+    `<button class="${l===lang?"active":""}" onclick="setLang('${l}')">${FLAGS[l]||l.toUpperCase()}</button>`).join("");
+
+  $("heroPh").innerHTML = photo(SITE.hero);
+  $("locPh").innerHTML = photo(SITE.locationPhoto);
+
+  $("spacesList").innerHTML = SPACES.map((s, i) => `
+    <div class="space ${i % 2 ? "rev" : ""}">
+      <div class="strip">${s.photos.map(p => `<div class="ph">${photo(p)}</div>`).join("")}</div>
+      <div class="space-txt">
+        <span class="time">${esc(t(s.time, lang))}</span>
+        <h3>${esc(t(s.title, lang))}</h3>
+        <p>${esc(t(s.text, lang))}</p>
+      </div>
+    </div>`).join("");
+
+  renderMenu();
+
+  const tel = SITE.phone.replace(/\s/g, "");
+  $("bookBtns").innerHTML =
+    `<a class="btn" href="tel:${tel}">${esc(t(UI.call, lang))}</a>` +
+    (SITE.whatsapp ? `<a class="btn" href="https://wa.me/${SITE.whatsapp}" target="_blank" rel="noopener">${esc(t(UI.wa, lang))}</a>` : "");
+  $("bookNum").textContent = SITE.phone;
+
+  $("addr").textContent = t(SITE.address, lang);
+  $("hours").innerHTML = `<div><strong>${esc(t(UI.hoursT, lang))}</strong><span></span></div>` +
+    SITE.hours.map(h => `<div><span>${esc(t(h.d, lang))}</span><span>${h.h}</span></div>`).join("");
+  $("mapsBtn").href = SITE.mapsUrl;
+
+  $("footAddr").textContent = t(SITE.address, lang) + " · " + SITE.phone;
+  $("social").innerHTML =
+    (SITE.instagram ? `<a href="${SITE.instagram}" target="_blank" rel="noopener">Instagram</a>` : "") +
+    (SITE.facebook ? `<a href="${SITE.facebook}" target="_blank" rel="noopener">Facebook</a>` : "");
+  $("yr").textContent = new Date().getFullYear();
+  document.title = SITE.name + " — Café Restaurant";
+}
+
+function setLang(l){ lang = l; try { localStorage.setItem("lang", l); } catch(e){} render(); }
+function setCat(id){ activeCat = id; renderMenu(); }
+
+lang = pickLang();
+render();
+</script>
+</body>
+</html>
